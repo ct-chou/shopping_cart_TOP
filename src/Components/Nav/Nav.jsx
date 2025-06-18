@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Nav.module.css';
+import styles from './Nav.module.css';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export const Nav = () => (
-    <nav className="nav">
+    <nav className={styles.nav}>
         <ul className="nav-list">
             <li>
                 <Link to="/">Home</Link>
@@ -12,7 +13,10 @@ export const Nav = () => (
                 <Link to="/shop">Products</Link>
             </li>
             <li>
-                <Link to="/cart">Cart</Link>
+                <Link to="/cart" className={styles.cartLink}>
+                    <FaShoppingCart className={styles.cartIcon} />
+                     Cart
+                </Link>
             </li>
         </ul>
     </nav>

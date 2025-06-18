@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div id={styles.container}>
         <header className={styles.header}>
-            <h1>Shopping Cart</h1>
+            <h1>Another Dummy Online Store</h1>
             <Nav />
         </header>
 
