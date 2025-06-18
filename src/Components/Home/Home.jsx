@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import  styles from './Home.module.css'
+import styles from './Home.module.css'
 import {Nav} from '../Nav/Nav.jsx'
 
 export default function Home() {
