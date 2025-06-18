@@ -1,25 +1,29 @@
 import { useState } from 'react'
-import './Home.module.css'
+import  styles from './Home.module.css'
 import {Nav} from '../Nav/Nav.jsx'
 
 export default function Home() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-        <Nav />
-        <div className="home-container">
-            <h1>Welcome to Our Shopping Cart</h1>
+    <div id={styles.container}>
+        <header className={styles.header}>
+            <h1>Shopping Cart</h1>
+            <Nav />
+        </header>
+
+        <div className={styles.homeContainer}>
+            <h1>Welcome to Our Store</h1>
             <p>Explore our products and add them to your cart!</p>
             <button onClick={() => setCount(count + 1)}>
                 Count is: {count}
             </button>
         </div>
-        <footer className="footer">
+        <footer className={styles.footer}>
             <p>&copy; 2025 Shopping Cart. All rights reserved.</p>
         </footer>
         
-    </>
+    </div>
   )
 }
 

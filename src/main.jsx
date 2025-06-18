@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './index.css'
+import './index.css' // Assuming you have a global CSS file
 import Home from './Components/Home/Home.jsx'
 import Shop from './Components/Shop/Shop.jsx'
 
