@@ -2,34 +2,11 @@ import React, {useState, useEffect} from "react";
 import styles from "./Shop.module.css"; // Optional: for styling
 import { Nav } from "../Nav/Nav.jsx"; // Assuming you have a Nav component
 
-// const items = [
-//     {
-//         id: 1,
-//         name: "Wireless Headphones",
-//         price: 59.99,
-//         image: "https://via.placeholder.com/150",
-//         description: "High-quality wireless headphones with noise cancellation.",
-//     },
-//     {
-//         id: 2,
-//         name: "Smart Watch",
-//         price: 99.99,
-//         image: "https://via.placeholder.com/150",
-//         description: "Track your fitness and notifications on the go.",
-//     },
-//     {
-//         id: 3,
-//         name: "Bluetooth Speaker",
-//         price: 29.99,
-//         image: "https://via.placeholder.com/150",
-//         description: "Portable speaker with deep bass and long battery life.",
-//     },
-// ];
-
 function Shop() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [quantities, setQuantities] = useState({});
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -43,6 +20,12 @@ function Shop() {
                 
                 const data = await response.json();
                 setItems(data);
+                 // Initialize quantities for all products to 1
+                const initialQuantities = {};
+                data.forEach(item => {
+                    initialQuantities[item.id] = 1;
+                });
+                setQuantities(initialQuantities);
             } catch (error) {
                 console.error('Error fetching products:', error);
                 setError('Failed to load products. Please try again later.');
@@ -53,6 +36,23 @@ function Shop() {
 
         fetchProducts();
     }, []);
+
+        // Handle quantity changes
+    const handleQuantityChange = (id, newQuantity) => {
+        // Prevent negative or zero quantities
+        if (newQuantity < 1) return;
+        
+        setQuantities({
+            ...quantities,
+            [id]: newQuantity
+        });
+    };
+
+    // Add to cart function (you'll need to implement cart state management)
+    const addToCart = (item, quantity) => {
+        console.log(`Added ${quantity} of ${item.title} to cart`);
+        // Here you would update your cart state
+    };
 
     if (loading) return <div className={styles.loading}>Loading products...</div>;
     if (error) return <div className={styles.error}>{error}</div>;
@@ -71,9 +71,35 @@ function Shop() {
                         <img src={item.image} alt={item.name} />
                         <h2>{item.title}</h2>
                         <p className={styles.itemDescription}>{item.description}</p>
-                        <div className="item-footer">
+                        {/* <div className="item-footer">
                             <span>${item.price.toFixed(2)}</span>
                             <button>Add to Cart</button>
+                        </div> */}
+                        <div className={styles.itemFooter}>
+                            <span className={styles.price}>${item.price.toFixed(2)}</span>
+                            
+                            <div className={styles.quantityControls}>
+                                <button 
+                                    className={styles.quantityBtn}
+                                    onClick={() => handleQuantityChange(item.id, quantities[item.id] - 1)}
+                                >
+                                    -
+                                </button>
+                                <span className={styles.quantity}>{quantities[item.id]}</span>
+                                <button 
+                                    className={styles.quantityBtn}
+                                    onClick={() => handleQuantityChange(item.id, quantities[item.id] + 1)}
+                                >
+                                    +
+                                </button>
+                            </div>
+                            
+                            <button 
+                                className={styles.addToCartBtn}
+                                onClick={() => addToCart(item, quantities[item.id])}
+                            >
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
                 ))}
