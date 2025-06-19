@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from "./Shop.module.css"; // Optional: for styling
 import { Nav } from "../Nav/Nav.jsx"; // Assuming you have a Nav component
 
-function Shop() {
+function Shop({ addToCart, cartAmount }) {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -48,12 +48,11 @@ function Shop() {
         });
     };
 
-    // Add to cart function (you'll need to implement cart state management)
-    const addToCart = (item, quantity) => {
-        console.log(`Added ${quantity} of ${item.title} to cart`);
-        // Here you would update your cart state
+    const subAddToCart = (itemId, quantity) => {
+        quantities[itemId] = 1; //reset quantity to 1 after adding to cart
+        addToCart(quantity);
     };
-
+    
     if (loading) return <div className={styles.loading}>Loading products...</div>;
     if (error) return <div className={styles.error}>{error}</div>;
 
@@ -62,7 +61,7 @@ function Shop() {
         <div className={styles.shopContainer}>
             <header className={styles.header}>
                         <h1>Another Dummy Online Store</h1>
-                        <Nav />
+                        <Nav cartAmount={cartAmount}/>
             </header>
             <h1>Shop</h1>
             <div className={styles.itemContainer}>
@@ -96,7 +95,7 @@ function Shop() {
                             
                             <button 
                                 className={styles.addToCartBtn}
-                                onClick={() => addToCart(item, quantities[item.id])}
+                                onClick={() => subAddToCart(item.id, quantities[item.id])}
                             >
                                 Add to Cart
                             </button>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import { FaShoppingCart } from 'react-icons/fa';
 
-export const Nav = () => (
+export const Nav = ({cartAmount}) => (
     <nav className={styles.nav}>
         <ul className="nav-list">
             <li>
@@ -14,8 +14,13 @@ export const Nav = () => (
             </li>
             <li>
                 <Link to="/cart" className={styles.cartLink}>
-                    <FaShoppingCart className={styles.cartIcon} />
-                     Cart
+                    <div className={styles.cartIconContainer}>
+                            <FaShoppingCart className={styles.cartIcon} />
+                            {cartAmount > 0 && (
+                                <span className={styles.cartBadge}>{cartAmount}</span>
+                            )}
+                        </div>
+                     Cart 
                 </Link>
             </li>
         </ul>
