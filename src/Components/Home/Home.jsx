@@ -1,6 +1,7 @@
 import styles from './Home.module.css'
 import {Nav} from '../Nav/Nav.jsx'
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function Home(props) {
 
