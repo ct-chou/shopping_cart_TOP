@@ -8,13 +8,13 @@ export const Nav = (props) => (
     <nav className={styles.nav}>
         <ul className="nav-list">
             <li>
-                <Link to="/">Home</Link>
+                <Link to="/" className={styles.link}>Home</Link>
             </li>
             <li>
-                <Link to="/shop">Products</Link>
+                <Link to="/shop" className={styles.link}>Products</Link>
             </li>
             <li>
-                <Link to="/cart" className={styles.cartLink}>
+                <Link to="/cart" className={styles.cartLink + ' ' + styles.link}>
                     <div className={styles.cartIconContainer}>
                             <FaShoppingCart className={styles.cartIcon} />
                             {props.cartAmount > 0 && (

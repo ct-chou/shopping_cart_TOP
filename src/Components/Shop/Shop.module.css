@@ -12,6 +12,13 @@
   background-color: black;
 }
 
+.headerLink {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .shopContainer {
   display: flex;
   flex-direction: column;

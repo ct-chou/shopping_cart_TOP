@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from "./Shop.module.css"; // Optional: for styling
 import { Nav } from "../Nav/Nav.jsx"; // Assuming you have a Nav component
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function Shop(props) {
     const [items, setItems] = useState([]);
@@ -61,7 +62,9 @@ function Shop(props) {
     return (
         <div className={styles.shopContainer}>
             <header className={styles.header}>
-                        <h1>Another Dummy Online Store</h1>
+                        <Link to="/" className={styles.headerLink}>
+                            <h1>Another Dummy Online Store</h1>
+                        </Link>
                         <Nav cartAmount={props.cartAmount}/>
             </header>
             <h1>Shop</h1>

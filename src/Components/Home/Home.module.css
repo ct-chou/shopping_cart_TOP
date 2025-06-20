@@ -7,6 +7,13 @@
   height: 100vh;
 }
 
+.headerLink {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .header {
   width: 100vw;
   height: 80px;
