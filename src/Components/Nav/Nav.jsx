@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import { FaShoppingCart } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
-export const Nav = ({cartAmount}) => (
+export const Nav = (props) => (
     <nav className={styles.nav}>
         <ul className="nav-list">
             <li>
@@ -16,8 +17,8 @@ export const Nav = ({cartAmount}) => (
                 <Link to="/cart" className={styles.cartLink}>
                     <div className={styles.cartIconContainer}>
                             <FaShoppingCart className={styles.cartIcon} />
-                            {cartAmount > 0 && (
-                                <span className={styles.cartBadge}>{cartAmount}</span>
+                            {props.cartAmount > 0 && (
+                                <span className={styles.cartBadge}>{props.cartAmount}</span>
                             )}
                         </div>
                      Cart 
@@ -26,5 +27,9 @@ export const Nav = ({cartAmount}) => (
         </ul>
     </nav>
 );
+
+Nav.PropTypes = {
+    cartAmount: PropTypes.number.isRequired,
+};
 
 export default Nav;

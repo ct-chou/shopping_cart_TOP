@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import styles from "./Shop.module.css"; // Optional: for styling
 import { Nav } from "../Nav/Nav.jsx"; // Assuming you have a Nav component
+import PropTypes from 'prop-types';
 
-function Shop({ addToCart, cartAmount }) {
+function Shop(props) {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -50,7 +51,7 @@ function Shop({ addToCart, cartAmount }) {
 
     const subAddToCart = (itemId, quantity) => {
         quantities[itemId] = 1; //reset quantity to 1 after adding to cart
-        addToCart(quantity);
+        props.addToCart(quantity);
     };
     
     if (loading) return <div className={styles.loading}>Loading products...</div>;
@@ -61,7 +62,7 @@ function Shop({ addToCart, cartAmount }) {
         <div className={styles.shopContainer}>
             <header className={styles.header}>
                         <h1>Another Dummy Online Store</h1>
-                        <Nav cartAmount={cartAmount}/>
+                        <Nav cartAmount={props.cartAmount}/>
             </header>
             <h1>Shop</h1>
             <div className={styles.itemContainer}>
@@ -109,5 +110,10 @@ function Shop({ addToCart, cartAmount }) {
         </div>
     );
 }
+
+Shop.propTypes = {
+    addToCart: PropTypes.func.isRequired,
+    cartAmount: PropTypes.number.isRequired
+};
 
 export default Shop;
